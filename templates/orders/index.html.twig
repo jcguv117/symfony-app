@@ -1,0 +1,34 @@
+
+{% block body %}
+    <h1>Orders</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idorder</th>
+                <th>Idproduct</th>
+                <th>Amount</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.idorder }}</td>
+                <td>{{ order.idproduct }}</td>
+                <td>{{ order.amount }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('app_orders_show', {'idorder': order.idorder}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('app_orders_edit', {'idorder': order.idorder}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_orders_new') }}">Create new</a>
+{% endblock %}

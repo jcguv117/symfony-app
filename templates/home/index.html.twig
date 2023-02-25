@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="container m-4 d-flex flex-row ">
+    <div class="w-100 px-2">
+        {% include 'products/index.html.twig' %}
+    </div>
+    <div class="w-100 px-2">
+        {% include 'orders/index.html.twig' %}
+    </div>
+</div>
+
+    <h1>Most Sold Products</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Sold Amount</th>
+                <th>Sold Sum</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for report in reports %}
+            <tr>
+                <td>{{ report.productName }}</td>
+                <td>{{ report.amount }}</td>
+                <td>{{ report.total }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
