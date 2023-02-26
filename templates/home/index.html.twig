@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}CG SYMFONY APP{% endblock %}
 
 {% block body %}
 <div class="container-fluid d-flex flex-row ">
@@ -38,6 +38,54 @@
         </tbody>
     </table>
 </div>
+<br/>
+<br/>
+<div class="m-4">
+    <h5>Test API</h5>
+    <br/>
+    <button class="btn btn-info" type="button" onclick="getApiProducts()">Api List of Products </button>
+    <button class="btn btn-info" type="button" onclick="getApiOrders()">Api Most Sold Products </button>
+</div>
 
+<div class="container">
+    <table class="table table-bordered">
+        <thead></thead>
+        <tbody id="listBody">
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+
+function getApiProducts(){
+    fetch('http://{{ host }}/api/products')
+    .then(response => response.json())
+    .then(data => {printData(data,'listBody');})
+    .catch(error => console.error(error));
+}
+
+function getApiOrders(){
+    fetch('http://{{ host }}/api/orders')
+    .then(response => response.json())
+    .then(data => {printData(data,'listBody');})
+    .catch(error => console.error(error));
+}
+
+function printData(data, elementId){
+    let output = '';
+    if(!data) return;
+    Object.keys(data[0]).forEach(prop => { output += ` <th>${prop}</th>`; })
+    data.forEach(obj => {
+        output += "<tr>"
+        for (const property in obj) {
+            output += ` <td>${obj[property]}</td>`;
+        }
+        output += "</tr>"
+    });
+    document.getElementById(elementId).innerHTML = output;
+
+}
+</script>
 
 {% endblock %}

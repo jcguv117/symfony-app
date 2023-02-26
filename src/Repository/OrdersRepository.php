@@ -43,33 +43,9 @@ class OrdersRepository extends ServiceEntityRepository
 
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT p.productName, sum(o.amount) as amount, sum(p.price * o.amount) as total FROM App:Orders o JOIN App:Products p WITH o.idproduct = p.idproduct
+                'SELECT o.idorder, p.productName, sum(o.amount) as amount, sum(p.price * o.amount) as total FROM App:Orders o JOIN App:Products p WITH o.idproduct = p.idproduct
                 GROUP BY o.idproduct')
             ->getResult();
     }
 
-//    /**
-//     * @return Orders[] Returns an array of Orders objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Orders
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
