@@ -3,7 +3,8 @@
 {% block title %}Products{% endblock %}
 
 {% block body %}
-    <h1>Products</h1>
+<div class="container w-50 my-4">
+    <h1>Product #{{ product.idproduct }}</h1>
 
     <table class="table">
         <tbody>
@@ -21,10 +22,12 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_products_index') }}">back to list</a>
-
-    <a href="{{ path('app_products_edit', {'idproduct': product.idproduct}) }}">edit</a>
-
-    {{ include('products/_delete_form.html.twig') }}
+    <div class="d-flex flex-row justify-content-between">
+        <a class="btn btn-secondary" href="{{ path('app_products_index') }}">back to list</a>
+        <div class="d-flex flex-row">
+            <a class="btn btn-warning mx-2" href="{{ path('app_products_edit', {'idproduct': product.idproduct}) }}">edit</a>
+            {{ include('products/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
 {% endblock %}

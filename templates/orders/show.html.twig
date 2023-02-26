@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Orders{% endblock %}
-
 {% block body %}
-    <h1>Orders</h1>
+<div class="container w-50 my-4">
+    <h1>Order #{{ order.idorder }}</h1>
 
-    <table class="table">
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <th>Idorder</th>
@@ -21,10 +21,13 @@
             </tr>
         </tbody>
     </table>
+    <div class="d-flex flex-row justify-content-between">
+    <a class="btn btn-secondary" href="{{ path('app_orders_index') }}">back to list</a>
+        <div class="d-flex flex-row">
+        <a class="btn btn-warning mx-2" href="{{ path('app_orders_edit', {'idorder': order.idorder}) }}">edit</a>
 
-    <a href="{{ path('app_orders_index') }}">back to list</a>
-
-    <a href="{{ path('app_orders_edit', {'idorder': order.idorder}) }}">edit</a>
-
-    {{ include('orders/_delete_form.html.twig') }}
+        {{ include('orders/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
 {% endblock %}
